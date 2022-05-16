@@ -5,9 +5,14 @@ const {
   VueLoaderPlugin
 } = require('vue-loader');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
-
-const chalk = require('chalk')
+// const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
+// const UnpluginElementPlus = require('unplugin-element-plus/webpack');
+// const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const {
+  NaiveUiResolver
+} = require('unplugin-vue-components/resolvers')
+const chalk = require('chalk');
 module.exports = {
   // 入口文件
   entry: {
@@ -21,7 +26,9 @@ module.exports = {
     clean: true,
   },
   plugins: [
-    new FriendlyErrorsWebpackPlugin(),
+    Components({
+      resolvers: [NaiveUiResolver()],
+    }),
     new HTMLWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',

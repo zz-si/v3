@@ -36,7 +36,7 @@ module.exports = merge(base, {
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,
         // 不使用多进程压缩
-        parallel: false,
+        parallel: true,
         extractComments: true,
         terserOptions: {
           compress: {
