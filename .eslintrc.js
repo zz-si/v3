@@ -1,39 +1,24 @@
 module.exports = {
-  root: true,
-
   env: {
-    node: true,
     browser: true,
-    es2022: true,
+    es2021: true,
   },
-  plugins: ['prettier'],
-  // extends: 'airbnb-base',
+  parser: "vue-eslint-parser",
+  parserOptions: {
+    ecmaVersion: 13,
+    parser: "@typescript-eslint/parser",
+    sourceType: "module",
+  },
+  plugins: ["vue", "@typescript-eslint", "prettier"],
+  // extends的优先级也是从后往前的
+  extends: [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+  ],
   rules: {
-    // 1. off 关闭 对应数字0
-    // 2. warn 警告 对应数字1
-    // 3. error 错误 对应数字2
-    // 'no-console': 'warn',
-    // 'semi': 'warn',
-    // 'eol-last': 'off',
-    // 'no-new': 'off',
-    // 'arrow-parens': 'off',
-    // 'no-duplicate-imports': 'error',
-    // 'import/no-extraneous-dependencies': 'off',
-    // 'comma-danger': 'off',
-    // 'no-useless-escape': 'off'
-    'no-console': 'warn',
-    semi: 'off',
-    'eol-last': 'off',
-    'no-new': 'off',
-    'arrow-parens': 'off',
-    'import/no-extraneous-dependencies': 'off',
-    'comma-danger': 'off',
-    'no-useless-escape': 'off',
-    // 'prettier/prettier': 'error',
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-types": "off",
   },
-   // 语言风格
-   parserOptions: {
-    // 支持import
-    sourceType: 'module'
-  },
-}
+};

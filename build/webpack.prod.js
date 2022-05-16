@@ -1,9 +1,13 @@
-const { merge } = require('webpack-merge');
+const {
+  merge
+} = require('webpack-merge');
 const base = require('./webpack.base');
 const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const {
+  BundleAnalyzerPlugin
+} = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
 let productionGzipExtensions = /\.(js|css|json|txt|html|ico|png|jpe?g|gif|svg|webp)(\?.*)?$/i
 module.exports = merge(base, {
@@ -15,7 +19,7 @@ module.exports = merge(base, {
         env: {
           NODE_ENV: JSON.stringify('production'),
         }
-      }      
+      }
     }),
     new BundleAnalyzerPlugin(),
     new CompressionPlugin({
@@ -39,10 +43,10 @@ module.exports = merge(base, {
             drop_console: true, // 去除console
           }
         }
-      }), 
+      }),
       // 压缩css
       new CssMinimizerPlugin({
-          parallel: false,
+        parallel: false,
       })
     ]
   }

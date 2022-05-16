@@ -1,13 +1,17 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
+const {
+  VueLoaderPlugin
+} = require('vue-loader');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
+
 const chalk = require('chalk')
 module.exports = {
   // 入口文件
   entry: {
-    main: './src/main.js'
+    main: './src/main.ts'
   },
   // 输出
   output: {
@@ -17,10 +21,12 @@ module.exports = {
     clean: true,
   },
   plugins: [
+    new FriendlyErrorsWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
       inject: 'body',
+      title: 'vu3'
     }),
     new MiniCssExtractPlugin({
       filename: 'styles/chunk-[contenthash].css',
@@ -32,8 +38,7 @@ module.exports = {
     })
   ],
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(css|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -57,7 +62,7 @@ module.exports = {
         }
       },
       {
-        test: /.js$/,
+        test: /.(t|j)s$/,
         exclude: /node-modules/,
         include: path.resolve(__dirname, '../src'),
         use: [
@@ -66,7 +71,21 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env'],
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    useBuiltIns: 'usage', // 按需引入 polyfill
+                    corejs: 3,
+                  },
+                ],
+                [
+                  "@babel/preset-typescript",
+                  {
+                    allExtensions: true, //支持所有文件扩展名
+                  },
+                ],
+              ],
               // 编译后缓存
               cacheDirectory: true,
             }
@@ -75,8 +94,8 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
-      }
+        loader: 'vue-loader',
+      },
     ]
   },
   resolve: {
@@ -86,6 +105,6 @@ module.exports = {
       // ？
       // tools: '~tools'
     },
-    extensions: ['.js', '.ts', '.scss', '.vue']
+    extensions: ['.js', '.ts', '.vue', '.json']
   }
 }

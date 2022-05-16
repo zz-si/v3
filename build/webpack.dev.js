@@ -1,5 +1,7 @@
 const path = require('path');
-const { merge } = require('webpack-merge');
+const {
+  merge
+} = require('webpack-merge');
 const base = require('./webpack.base');
 const webpack = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -20,6 +22,7 @@ module.exports = merge(base, {
       files: ['**/*.scss'],
     }),
     new ESLintPlugin({
+      extensions: ["js", "ts", "vue", 'jsx'],
       fix: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
@@ -28,7 +31,7 @@ module.exports = merge(base, {
         env: {
           NODE_ENV: JSON.stringify('development'),
         }
-      }      
+      }
     })
   ]
 })
