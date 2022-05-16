@@ -69,6 +69,5 @@
   },
   "dependencies": {
     "vue": "^3.2.33"
-  },
-  "type": "module"
+  }
 }
