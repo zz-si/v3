@@ -4,11 +4,15 @@ export const useCounterStore = defineStore("counter", {
   state: () => {
     return { count: 0 };
   },
-  // could also be defined as
-  // state: () => ({ count: 0 })
   actions: {
     increment() {
       this.count++;
+    },
+  },
+  // 类似计算属性
+  getters: {
+    getPlusOneCount(): number {
+      return this.count + 1;
     },
   },
 });

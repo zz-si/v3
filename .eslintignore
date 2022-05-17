@@ -11,3 +11,8 @@ dist
 .husky
 .local
 /bin
+commitlint.config.js
+babel.config.js
+components.d.ts
+lint-staged.config.js
+stylelint.config.js
