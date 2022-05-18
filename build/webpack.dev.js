@@ -11,7 +11,15 @@ module.exports = merge(base, {
   mode: 'development',
   devServer: {
     open: true,
-    hot: true
+    hot: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {
+          '^/api': ''
+        },
+      },
+    },
   },
   devtool: 'eval-cheap-module-source-map',
   plugins: [

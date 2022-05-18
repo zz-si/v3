@@ -2,11 +2,14 @@ import { defineStore } from "pinia";
 
 export const useCounterStore = defineStore("counter", {
   state: () => {
-    return { count: 0 };
+    return { count: 0, name: "小希" };
   },
   actions: {
-    increment() {
-      this.count++;
+    increment(n?: number) {
+      (n && (this.count = n)) || this.count++;
+    },
+    changeName(name: string) {
+      this.name = name;
     },
   },
   // 类似计算属性

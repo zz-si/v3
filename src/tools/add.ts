@@ -1,4 +1,4 @@
-export function plus_one(num1: number) {
+export function plus_one(num1: number): number {
   // console.log(num1, num2);
   const res = num1 + 1;
   // res = 2;

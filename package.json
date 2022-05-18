@@ -4,7 +4,7 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "webpack --config ./build/webpack.prod",
     "start": "webpack serve --config ./build/webpack.dev",
     "eslint": "eslint ./src",
@@ -19,16 +19,20 @@
     "@babel/core": "^7.17.10",
     "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
-    "@babel/preset-typescript": "^7.16.7",
+    "@babel/preset-typescript": "^7.17.12",
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
+    "@pinia/testing": "^0.0.12",
+    "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
     "@vue/babel-preset-jsx": "^1.2.4",
     "@vue/compiler-sfc": "^3.2.33",
     "@vue/test-utils": "^2.0.0-rc.21",
     "babel-cli": "^6.26.0",
+    "babel-jest": "^26.3.0",
     "babel-loader": "^8.2.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "compression-webpack-plugin": "^9.2.0",
@@ -45,6 +49,8 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.0",
+    "jest": "^26.6.3",
+    "jest-transform-stub": "^2.0.0",
     "lint-staged": "^12.4.1",
     "mini-css-extract-plugin": "^2.6.0",
     "naive-ui": "^2.28.4",
@@ -61,10 +67,12 @@
     "stylelint-webpack-plugin": "^3.2.0",
     "terser-webpack-plugin": "^5.3.1",
     "thread-loader": "^3.0.4",
+    "ts-jest": "^26.5.0",
     "typescript": "^4.6.4",
     "unplugin-vue-components": "^0.19.5",
     "vfonts": "^0.0.3",
     "vue-eslint-parser": "^9.0.1",
+    "vue-jest": "^5.0.0-alpha.10",
     "vue-loader": "^17.0.0",
     "webpack": "^5.72.1",
     "webpack-bundle-analyzer": "^4.5.0",
@@ -72,8 +80,86 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "pinia": "^2.0.14",
+    "qs": "^6.10.3",
     "vue": "^3.2.33",
     "vue-router": "^4.0.15"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "verbose": true,
+    "collectCoverage": true,
+    "testURL": "http://localhost/",
+    "collectCoverageFrom": [
+      "**/*.{ts,vue}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "html",
+      "text-summary"
+    ],
+    "globals": {
+      "vue-jest": {
+        "tsConfig": {
+          "importHelpers": true
+        },
+        "resources": {
+          "scss": [
+            "./node_modules/package/_mixins.scss",
+            "./src/assets/css/globals.scss"
+          ]
+        },
+        "babelConfig": {
+          "presets": [
+            [
+              "env",
+              {
+                "useBuiltIns": "entry",
+                "shippedProposals": true
+              }
+            ]
+          ],
+          "plugins": [
+            "syntax-dynamic-import"
+          ],
+          "env": {
+            "test": {
+              "plugins": [
+                "dynamic-import-node"
+              ]
+            }
+          }
+        }
+      },
+      "ts-jest": {
+        "compiler": true,
+        "tsconfig": true,
+        "useESM": true
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "vue",
+      "js",
+      "jsx",
+      "tsx",
+      "json"
+    ],
+    "testMatch": [
+      "<rootDir>/__tests__/**/*.spec.ts"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!vue-loading-spinner)"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }

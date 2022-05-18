@@ -45,28 +45,7 @@
   </n-space>
   <router-view></router-view>
 </template>
-<script>
-// import { ElButton } from "element-plus";
-// import "element-plus/es/components/button/style/css";
-// import { createTheme, inputDark, datePickerDark } from "naive-ui";
-// locale & dateLocale
-// import { zhCN, dateZhCN } from "naive-ui";
-export default {
-  // components: {
-  //   NConfigProvider,
-  //   NInput,
-  //   NDatePicker,
-  //   NSpace,
-  // },
-  // setup() {
-  //   return {
-  //     darkTheme: createTheme([inputDark, datePickerDark]),
-  //     zhCN,
-  //     dateZhCN,
-  //   };
-  // },
-};
-</script>
+<script setup lang="ts"></script>
 <style lang="scss">
 body {
   background: black;

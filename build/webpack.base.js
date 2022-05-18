@@ -1,28 +1,28 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {
   VueLoaderPlugin
-} = require('vue-loader');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+} = require("vue-loader");
+const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 // const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 // const UnpluginElementPlus = require('unplugin-element-plus/webpack');
 // const AutoImport = require('unplugin-auto-import/webpack')
-const Components = require('unplugin-vue-components/webpack')
+const Components = require("unplugin-vue-components/webpack");
 const {
   NaiveUiResolver
-} = require('unplugin-vue-components/resolvers')
-const chalk = require('chalk');
+} = require("unplugin-vue-components/resolvers");
+const chalk = require("chalk");
 module.exports = {
   // 入口文件
   entry: {
-    main: './src/main.ts'
+    main: "./src/main.ts",
   },
   // 输出
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, "../dist"),
     // hash根据内容改变而改变，用于浏览器是否缓存
-    filename: 'js/chunk-[contenthash].js',
+    filename: "js/chunk-[contenthash].js",
     clean: true,
   },
   plugins: [
@@ -30,19 +30,19 @@ module.exports = {
       resolvers: [NaiveUiResolver()],
     }),
     new HTMLWebpackPlugin({
-      template: './public/index.html',
-      filename: 'index.html',
-      inject: 'body',
-      title: 'vu3'
+      template: "./public/index.html",
+      filename: "index.html",
+      inject: "body",
+      title: "vu3",
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles/chunk-[contenthash].css',
+      filename: "styles/chunk-[contenthash].css",
       ignoreOrder: true,
     }),
     new VueLoaderPlugin(),
     new ProgressBarPlugin({
-      format: `build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
-    })
+      format: `build [:bar] ${chalk.green.bold(":percent")} (:elapsed seconds)`,
+    }),
   ],
   module: {
     rules: [{
@@ -50,39 +50,39 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           // 'style-loader',
-          'css-loader',
-          'sass-loader',
-        ]
+          "css-loader",
+          "sass-loader",
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/,
-        type: 'asset/resource',
+        type: "asset/resource",
         parser: {
           // < 25kb转base64
           dataUrlCpmdition: {
             maxSize: 25 * 1024,
-          }
+          },
         },
         // 打包到dist/images
         generator: {
-          filename: 'images/[contenthash][ext][query]'
-        }
+          filename: "images/[contenthash][ext][query]",
+        },
       },
       {
         test: /.(t|j)s$/,
         exclude: /node-modules/,
-        include: path.resolve(__dirname, '../src'),
+        include: path.resolve(__dirname, "../src"),
         use: [
           // 暂时不适用多线程
           // 'thread-loader',
           {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: {
               presets: [
                 [
-                  '@babel/preset-env',
+                  "@babel/preset-env",
                   {
-                    useBuiltIns: 'usage', // 按需引入 polyfill
+                    useBuiltIns: "usage", // 按需引入 polyfill
                     corejs: 3,
                   },
                 ],
@@ -95,23 +95,23 @@ module.exports = {
               ],
               // 编译后缓存
               cacheDirectory: true,
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: "vue-loader",
       },
-    ]
+    ],
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, '../src'),
-      assets: '~/assets',
+      "@": path.resolve(__dirname, "../src"),
+      assets: "~/assets",
       // ？
       // tools: '~tools'
     },
-    extensions: ['.js', '.ts', '.vue', '.json']
-  }
-}
+    extensions: [".js", ".ts", ".vue", ".json"],
+  },
+};
