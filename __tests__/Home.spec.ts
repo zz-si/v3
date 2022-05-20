@@ -1,4 +1,4 @@
-import Home from "../src/views/Home.vue";
+import Home from "../src/views/HomeView.vue";
 import { mount } from "@vue/test-utils";
 import { createTestingPinia } from "@pinia/testing";
 import { useCounterStore } from "@/stores/counter";

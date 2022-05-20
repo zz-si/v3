@@ -14,14 +14,15 @@ module.exports = merge(base, {
     hot: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
-        pathRewrite: {
-          '^/api': ''
-        },
+        target: 'https://cnodejs.org',
+        // 默认情况下，不接受运行在 HTTPS 上，且使用了无效证书的后端服务器
+        secure: false,
+        // 设置为true, 本地就会虚拟一个服务器接收你的请求并代你发送该请求,
+        changeOrigin: true,
       },
     },
   },
-  devtool: 'eval-cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
   plugins: [
     // css样式规范配置
     new StylelintWebpackPlugin({

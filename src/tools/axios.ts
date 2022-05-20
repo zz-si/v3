@@ -1,11 +1,9 @@
-// code：-200为登录失效状态
-// code：-100为接口发生错误状态
-// code >0 接口返回成功值
-// code <-1 接口返回失败值
 // import request from "./request";
+// const productionURl = "";
+// const developmentURl = "";
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 axios.defaults.timeout = 10_000;
-axios.defaults.baseURL = "https://cnodejs.org/api/v1";
+axios.defaults.baseURL = "/api/v1";
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 // interface ResponseData<T = any> {
 //   success: boolean;

@@ -6,6 +6,8 @@ module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
   // 自定义规则
   rules: {
+    // 使用现代css颜色函数
+    "color-function-notation": "modern",
     'selector-pseudo-class-no-unknown': [
       true,
       {

@@ -1,3 +1,6 @@
 node_modules
 .vscode
 dist
+**.**.ts
+!src/shimes.*.ts
+coverage

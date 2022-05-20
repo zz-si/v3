@@ -25,16 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref } from "vue";
+import { ref } from "vue";
 import { FormInst, FormItemInst, FormItemRule, useMessage, FormRules } from "naive-ui";
 interface ModelType {
   age: string | null;
   password: string | null;
   reenteredPassword: string | null;
 }
-defineComponent({
-  name: "LoginVue",
-});
 const formRef = ref<FormInst | null>(null);
 const rPasswordFormItemRef = ref<FormItemInst | null>(null);
 const message = useMessage();

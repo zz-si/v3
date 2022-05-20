@@ -4,18 +4,20 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import routes from "./router/index";
-
+import "element-plus/theme-chalk/dark/css-vars.css";
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
 router.beforeEach((to, from) => {
   console.log(to, from);
-  if (to.meta.verification) {
-    // 如果为真并且未登录就去登录页
-    router.push({
-      path: "/login",
-    });
+  if (to.meta.verify) {
+    if (!sessionStorage.user) {
+      // 先提示
+      router.push({
+        path: "/loginInquiry",
+      });
+    }
   }
   // ...
   // explicitly return false to cancel the navigation

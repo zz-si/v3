@@ -18,3 +18,5 @@ lint-staged.config.js
 stylelint.config.js
 jest.config.js
 build
+*.*.ts
+coverage

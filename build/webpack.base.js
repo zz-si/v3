@@ -12,6 +12,11 @@ const Components = require("unplugin-vue-components/webpack");
 const {
   NaiveUiResolver
 } = require("unplugin-vue-components/resolvers");
+// 导入element plus 需要的插件
+// const AutoImport = require('unplugin-auto-import/webpack')
+// const {
+//   ElementPlusResolver
+// } = require('unplugin-vue-components/resolvers')
 const chalk = require("chalk");
 module.exports = {
   // 入口文件
@@ -29,6 +34,12 @@ module.exports = {
     Components({
       resolvers: [NaiveUiResolver()],
     }),
+    // AutoImport({
+    //   resolvers: [ElementPlusResolver()],
+    // }),
+    // Components({
+    //   resolvers: [ElementPlusResolver()],
+    // }),
     new HTMLWebpackPlugin({
       template: "./public/index.html",
       filename: "index.html",
