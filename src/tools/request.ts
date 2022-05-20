@@ -1,5 +1,5 @@
 import qs from "qs";
-import axios from "axios";
+import axios from "./axios";
 
 /**
  * 封装请求方式
@@ -15,7 +15,7 @@ const request = {
    * @param params 请求参数
    * @param callback 回调方法
    */
-  get(url: string, params: any, callback?: Function) {
+  get(url: string, params: any, callback?: Function): Promise<object> {
     return new Promise((resolve, reject) => {
       axios
         .get(url, {
@@ -81,29 +81,52 @@ const request = {
    * @date: 2021-03-08
    * @param {Number} status 请求失败的状态码
    */
-  errorHandle(status: any, other: any) {
+  errorHandle(status: number) {
     // 状态码判断
     switch (status) {
+      case 0:
+        console.log("访问的主机地址不存在");
+        break;
+      case 400:
+        console.log("参数错误");
+        break;
       // 401: 未登录状态，跳转登录页
       case 401:
-        // toLogin();
+        console.log("未登录");
+
         break;
       // 403 token过期
       // 清除token并跳转登录页
       case 403:
-        // tip('登录过期，请重新登录');
-        // localStorage.removeItem('token');
-        // store.commit('loginSuccess', null);
-        setTimeout(() => {
-          // toLogin();
-        }, 1000);
+        console.log("登录过期");
         break;
       // 404请求不存在
       case 404:
-        // tip('请求的资源不存在');
+        console.log("访问的地址不存在");
+        break;
+      case 408:
+        console.log("请求超时(408)");
+        break;
+      case 500:
+        console.log("服务器错误(500)");
+        break;
+      case 501:
+        console.log("服务未实现(501)");
+        break;
+      case 502:
+        console.log("网络错误(502)");
+        break;
+      case 503:
+        console.log("服务不可用(503)");
+        break;
+      case 504:
+        console.log("网络超时(504)");
+        break;
+      case 505:
+        console.log("HTTP版本不受支持(505)");
         break;
       default:
-        console.log(other);
+        console.log(status);
     }
   },
 };

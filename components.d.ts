@@ -5,8 +5,12 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    MessageApi: typeof import('./src/components/Message-api.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
-    NIcon: typeof import('naive-ui')['NIcon']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NInput: typeof import('naive-ui')['NInput']
+    NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NSpace: typeof import('naive-ui')['NSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
